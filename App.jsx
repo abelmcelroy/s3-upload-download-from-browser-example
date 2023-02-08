@@ -18,15 +18,16 @@ export default function App() {
   }
 
   const load = async (e) => {
-    const contents = await getObjectFromS3(e.target.value);
-    setFileName(e.target.value);
+    const nextFileName = e.target.value;
+    const contents = await getObjectFromS3(nextFileName);
+    setFileName(nextFileName);
     setFileContents(contents);
   }
 
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <select value={fileName} onChange={load}>
-        <option disabled={true} value={""}>select a file</option>
+        <option disabled value={""}>select a file</option>
         {fileNames.map((file, i) => (
           <option key={i} value={file}>{file}</option>
         ))}
